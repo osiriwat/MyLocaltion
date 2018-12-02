@@ -23,7 +23,7 @@
 	<plugin name="cordova-plugin-geolocation"/>
 	<plugin name="cordova-plugin-inappbrowser"/>
 	<plugin name="cordova-plugin-whitelist"/>
-	<plugin name="cordova-plugin-in-app-youtube"/>
+	<plugin name="https://github.com/davidefavia/cordova-plugin-in-app-youtube"/>
     <!--
         Enable individual API permissions here.
         The "device" permission is required for the 'deviceready' event.
