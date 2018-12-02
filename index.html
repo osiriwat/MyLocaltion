@@ -13,6 +13,7 @@
     //
     function onLoad() {
         document.addEventListener("deviceready", onDeviceReady, false);
+	
     }
 
     // PhoneGap is loaded and it is now safe to call PhoneGap methods
@@ -20,12 +21,16 @@
     function onDeviceReady() {
         // Register the event listener
         document.addEventListener("backbutton", onBackKeyDown, false);
+        window.addEventListener("batterystatus", onBatteryStatus, false);
     }
-
+    function onBatteryStatus(status) 
+    {
+      alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
+    }
     // Handle the back button
     //
     function onBackKeyDown() {
-		alert("back");
+		  alert("back");
     }
 
     </script>
