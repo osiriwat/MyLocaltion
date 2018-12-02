@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>PhoneGap backbutton Example</title>
-   <script type=”text/javascript” charset=”utf-8” src=”phonegap.js”></script>
-   <script type=”text/javascript” charset=”utf-8”>
-   document.addEventListener(“deviceready”, onDeviceReady, false);
-   function onDeviceReady() {
-      document.addEventListener(“backbutton”, onBackButton, false);
-   }
-   function onBackButton() {
-      alert(“You hit the back button!”);
-   }
-   </script>
-</head>
-<body></body>
+  <head>
+    <title>PhoneGap Back Button Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    // Call onDeviceReady when PhoneGap is loaded.
+    //
+    // At this point, the document has loaded but cordova-1.5.0.js has not.
+    // When PhoneGap is loaded and talking with the native device,
+    // it will call the event `deviceready`.
+    //
+    function onLoad() {
+		alert("TEST1");
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // PhoneGap is loaded and it is now safe to call PhoneGap methods
+    //
+    function onDeviceReady() {
+        // Register the event listener
+		alert("TEST2");
+        document.addEventListener("backbutton", onBackKeyDown, false);
+    }
+
+    // Handle the back button
+    //
+    function onBackKeyDown() {
+		alert("TEST3");
+    }
+
+    </script>
+  </head>
+  <body onload="onLoad()">
+  </body>
 </html>
