@@ -21,6 +21,8 @@
 	<plugin name="cordova-plugin-file"/>
 	<plugin name="cordova-plugin-network-information"/>
 	<plugin name="cordova-plugin-geolocation"/>
+	<plugin name="cordova-plugin-inappbrowser"/>
+	<plugin name="cordova-plugin-whitelist"/>
     <!--
         Enable individual API permissions here.
         The "device" permission is required for the 'deviceready' event.
