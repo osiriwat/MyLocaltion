@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PhoneGap Back Button Example</title>
+<head>
+	<meta charset="utf-8">
+	<title>History TV</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.0.min.css" />
+	<script type="text/javascript" src="jquery-mobile/jquery-2.0.2.min.js"></script>
+	<script type="text/javascript" src="jquery-mobile/jquery.mobile-1.4.0.min.js"></script>
+</head>
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
+<body>
+<div data-role="page" id="mainmenu">
+	<div data-role="header" data-theme="b"><h1>รายการสารคดี</h1></div>
+    <div data-role="content">
+		<ul data-role="listview">
+			<li><a href="#movie1"><img src="images/ico.png"/>แหล่งอารยธรรมจากนอกโลก UFO</font></a></li>
+			<li><a href="#movie2"><img src="images/ico.png"/>ครบรอบ 100 ปีเรือไททานิคจม</a></li>
+			<li><a href="#movie3"><img src="images/ico.png"/>อียิปต์ โลกหลังความตาย</a></li>
+		</ul>
+    </div> 
+    <div data-role="footer" data-theme="b" data-position="fixed"><h3>History TV</h3></div>
+</div>
 
-    // Call onDeviceReady when PhoneGap is loaded.
-    //
-    // At this point, the document has loaded but cordova-1.5.0.js has not.
-    // When PhoneGap is loaded and talking with the native device,
-    // it will call the event `deviceready`.
-    //
-    function onLoad() {
-		alert("TEST1");
-        document.addEventListener("deviceready", onDeviceReady, false);
-    }
+<div data-role="page" id="movie1">
+	<div data-role="header" data-theme="b"><h1>แหล่งอารยธรรมจากนอกโลก UFO</h1></div>
+	<div data-role="content">
+		<p align="center"><iframe width="320" height="240" src="http://www.youtube.com/embed/4jkwqwOepOg" frameborder="0" allowfullscreen></iframe></p>
+	</div>
+	<div data-role="footer" data-theme="b" data-position="fixed"><h3>History TV</h3></div>
+</div>
 
-    // PhoneGap is loaded and it is now safe to call PhoneGap methods
-    //
-    function onDeviceReady() {
-        // Register the event listener
-		alert("TEST2");
-        document.addEventListener("backbutton", onBackKeyDown, false);
-    }
+<div data-role="page" id="movie2">
+	<div data-role="header" data-theme="b"><h1>ครบรอบ 100 ปีเรือไททานิคจม</h1></div>
+	<div data-role="content">
+		<p align="center"><iframe width="320" height="240" src="http://www.youtube.com/embed/hSY0kojE7u0" frameborder="0" allowfullscreen></iframe></p>
+	</div>
+	<div data-role="footer" data-theme="b" data-position="fixed"><h3>History TV</h3></div>
+</div>
 
-    // Handle the back button
-    //
-    function onBackKeyDown() {
-		alert("TEST3");
-    }
+<div data-role="page" id="movie3">
+	<div data-role="header" data-theme="b"><h1>ปริศนา UFO</h1></div>
+	<div data-role="content">
+		<p align="center"><iframe width="320" height="240" src="http://www.youtube.com/embed/n0K6Nub0JtE" frameborder="0" allowfullscreen></iframe></p>
+	</div>
+	<div data-role="footer" data-theme="b" data-position="fixed"><h3>History TV</h3></div>
+</div>
 
-    </script>
-  </head>
-  <body onload="onLoad()">
-  </body>
+</body>
 </html>
