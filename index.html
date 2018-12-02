@@ -1,61 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>PhoneGap Application</title>
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <script type="text/javascript">
-
-            // Wait for PhoneGap to load
-            document.addEventListener("deviceready", onDeviceReady, false);
-
-            // PhoneGap is ready
-            function onDeviceReady() {
-                navigator.geolocation.getCurrentPosition(onSuccess, onError);
-            }
-
-            function onSuccess(position) {
-                var geoElement = document.getElementById('geodata');
-                geoElement.innerHTML =
-                        'Latitude: ' + position.coords.latitude + '<br />' +
-                        'Longitude: ' + position.coords.longitude + '<br />' +
-                        'Altitude: ' + position.coords.altitude + '<br />' +
-                        'Accuracy: ' + position.coords.accuracy + '<br />' +
-                        'Heading: ' + position.coords.heading + '<br />' +
-                        'Speed: ' + position.coords.speed + '<br />' +
-                        'Timestamp: ' + position.coords.timestamp + '<br />';
-
-            }
-
-            function onError(error) {
-                var errString = '';
-                if (error.code) {
-                    switch (error.code) {
-                        case 1:
-                            errString =
-                                    'We do not have permission';
-                            break;
-                        case 2:
-                            errString =
-                                    'The location can not be determined';
-                            break;
-                        case 3:
-                            errString =
-                                    'There was a timeout';
-                            break;
-                        default:
-                            errString =
-                                    'Unknown error';
-                            break
-                    }
-                }
-                var element = document.getElementById('geodata');
-                element.innerHTML = errString;
-            }
-
-        </script>
-    </head>
-    <body>
-        <h1>Geolocation Data</h1>
-        <div id="geodata">Getting location data...</div>
-    </body>
+  <head>
+  	<meta charset="utf-8">
+    <title>Network Connection &amp; Events</title>
+	
+	<!-- PhoneGap Setup -->
+    <script type="text/javascript" src="phonegap.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    
+    <!-- jQuery Mobile Setup -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.0.min.css" />
+    <script type="text/javascript" src="jquery-mobile/jquery-2.0.2.min.js"></script>
+    <script type="text/javascript" src="jquery-mobile/jquery.mobile-1.4.0.min.js"></script>
+    
+  </head>
+  <body>
+  	<!-- Start of Network page -->
+  	<div data-role="page">
+    	<div data-role="header" data-theme="b" data-position="fixed">
+    		<h2>การเชื่อมต่อเครือข่าย</h2>
+    	</div>
+    	<div data-role="content">
+    		<div id="netowrk">
+	    		<h3>ตรวจสอบประเภทการเชื่อมต่อเครือข่าย:</h3>
+	    		<a data-role="button" id="checkConnection" data-theme="e">คลิกเพื่อตรวจสอบ</a>
+	    		<h3>สถานะการออนไลน์ / ออฟไลน์</h3>
+	    		<p id="online">อุปกรณ์นี้กำลังอยู่ในสถานะออนไลน์</p>
+    		<p id="offline">อุปกรณ์นี้กำลังอยู่ในสถานะออฟไลน์</p>
+    		</div>
+    	</div> 
+    	<div data-role="footer" data-theme="b" data-position="fixed" id="footer">
+    		<h3>@พัฒนาแอปโดย moo studio</h3>
+    	</div>
+	</div>
+	<!-- /Network page -->
+  </body>
 </html>
