@@ -16,6 +16,10 @@
         PhoneGap Team
     </author>
 
+	<plugin name="cordova-plugin-battery-status"/>
+	<plugin name="cordova-plugin-device"/>
+	<plugin name="cordova-plugin-file"/>
+	<plugin name="cordova-plugin-network-information"/>
     <!--
         Enable individual API permissions here.
         The "device" permission is required for the 'deviceready' event.
