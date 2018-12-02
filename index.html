@@ -1,45 +1,113 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Device Properties Example</title>
+    <head>
+        <meta name="viewport" content="user-scalable=no,initial-scale=1, maximum-scale=1,minimum-scale=1, width=device-width" />
+        <title>PhoneGap Database Application</title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.0.css" />
+        <script src="js/jquery-2.0.2.min.js"></script>
+        <script src="js/jquery.mobile-1.4.0.min.js"></script>
+        <script src="cordova.js"></script>
+        <script type="text/javascript">         
+            // Wait for PhoneGap to load
+            document.addEventListener("deviceready", onDeviceReady, false);
+            
+            var listElement = $('#tasks');
+            var messageElement = $('#message');
+            var db;
+            $( document ).ready(function() {               
+                $('button#add').bind('click', function(e) {
+                    console.log('Got Task');
+                    insertItem();
+                });
+            });
+            
+            // Create a reference to the database
+            function getDatabase() {
+                return window.openDatabase("mytodo","1.0", "myTodo Database", 200000);
+            } 
+                      
+            // PhoneGap is ready
+            function onDeviceReady() {
+                db = getDatabase();
+                db.transaction(function(tx) {
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, name)');
+                }, databaseError, getItems);
+            }
+            
+            // Run a select statement to pull out all records
+            function getItems() {
+                console.log('Entering getItems');
+                db.transaction(function(tx) {
+                    tx.executeSql('SELECT * FROM tasks', [],querySuccess, databaseError);
+                }, databaseError);
+                console.log('Leaving getItems');               
+            }
+            
+            // Process the SQLResultSetList
+            function querySuccess(tx, results) {
+                console.log('Entering querySuccess');
+                var len = results.rows.length;
+                var output = '';
+                for (var i=0; i<len; i++){
+                    output = output +
+                        '<li id="' + results.rows.item(i).id + '">' +
+                        results.rows.item(i).name + '</li>';
+                }
+                document.getElementById('tasks').innerHTML = output;
+                document.getElementById('message').innerHTML = 'There are '+len+' items in your list';
+                console.log('Leaving querySuccess');
+                $('#tasks').listview("refresh");
+            }
+            
+            // Insert a record into the database
+            function insertItem() {
+                console.log('Entering insertItem');
+                var insertValue = document.getElementById('taskInput').value;
+                db.transaction(function(tx) {
+                    tx.executeSql('INSERT INTO tasks (name) VALUES ("' + insertValue + '")');
+                }, databaseError, getItems);
+                // Clear the value from the input box
+                document.getElementById('taskInput').value = '';
+                console.log('Leaving insertItem');
+            }
+            
+            // Database error handler
+            function databaseError(error) {
+                messageElement.html("SQL Error: " + error.code);
+            }
+            
+            //Clear all tasks
+            function clearAll(){
+                console.log('Clearing Database');
+                 db.transaction(function(tx) {
+                    tx.executeSql('DELETE FROM TASKS');
+                }, databaseError, getItems);
+                document.getElementById('tasks').value = '';
+                return false;
+            }
+        </script>
+    </head>
+    <body>    
+        <div data-role="page">
+            <div data-role="header" data-theme="b">
+                <h1>Add Item</h1>
+            </div><!-- /header -->
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
+            <div data-role="content">	
 
-    // Wait for Cordova to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // Cordova is ready
-    //
-    function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }
-
-    // onSuccess Geolocation
-    //
-    function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + new Date(position.timestamp)          + '<br />';
-    }
-
-    // onError Callback receives a [PositionError](PositionError/positionError.html) object
-    //
-    function onError(error) {
-        alert('code: '    + error.code    + '\n' +
-              'message: ' + error.message + '\n');
-    }
-
-    </script>
-  </head>
-  <body>
-    <p id="geolocation">Finding geolocation...</p>
-  </body>
+                <input type="text" id="taskInput" />
+                <button id="add">Add Task</button>
+               <br />
+                 <button onclick="clearAll();">Clear Tasks</button>
+                <br />
+                <div id="message"></div>
+                <br />
+                <ul data-role="listview" id="tasks"></ul>
+                <br />
+            </div><!-- /content -->
+            <div id="footer" data-role="footer" data-theme="b">
+                <h4><span>Copyright &copy; 2014</span></h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->
+    </body>
 </html>
