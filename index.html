@@ -1,40 +1,56 @@
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <title>PhoneGap Back Button Example</title>
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="assets/css/jqm-demos.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
 
-    // Call onDeviceReady when PhoneGap is loaded.
-    //
-    // At this point, the document has loaded but cordova-1.5.0.js has not.
-    // When PhoneGap is loaded and talking with the native device,
-    // it will call the event `deviceready`.
-    //
-    function onLoad() {
-        document.addEventListener("deviceready", onDeviceReady, false);
-	
-    }
+<body>
+    <div data-role="page" class="jqm-demos" data-quicklinks="true">
+        <div data-role="tabs" id="tabs" class="ui-body-a ui-body">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" data-icon="home" data-ajax="false" class="ui-btn-active">หน้าแรก</a></li>
+                    <li><a href="#view" data-icon="eye" data-ajax="false">ชมเว็บไชต์</a></li>
+                    <li><a href="#help" data-icon="info" data-ajax="false">ช่วยเหลือ</a></li>
+                    <li><a href="#account" data-icon="user" data-ajax="false">บัญชีของฉัน</a></li>  
+                </ul>
+            </div>
+            <div id="home" class="ui-body-d ui-content">
+                <h1>home</h1>
+            </div>
+             <div id="view">
+                <h1>view</h1>
+            </div>
+            <div id="help">
+                <h1>help</h1>
+            </div>
+            <div id="account">
+                <img src="img/person.png" width="100px" height="100px">
+                <h3>แก้ไขบัญชีผู้ใช้งาน</h3>
+                <h5>ชื่อ :</h5>
+                <h5>สิทธิ์ใช้งาน :</h5>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#product" data-icon="" data-ajax="false" class="ui-btn-active">จัดการสินค้า</a></li>
+                        <li><a href="#company" data-icon="" data-ajax="false">จัดการสถานประกอบการ</a></li>
+                        <li><a href="#appove" data-icon="" data-ajax="false">อนุมัติสินค้า</a></li>
+                    </ul>
+                </div><br>
+                <a href="#" class="ui-btn ui-icon-plus ui-btn-icon-left">เพิ่ม keyword</a>
+                <a href="#" class="ui-btn ui-icon-search ui-btn-icon-left">Search</a>
+            </div>
+        </div>
+        <div data-role="footer">
+            <h4>ฺ</h4>
+        </div>
+    </div>
+</body>
 
-    // PhoneGap is loaded and it is now safe to call PhoneGap methods
-    //
-    function onDeviceReady() {
-        // Register the event listener
-        document.addEventListener("backbutton", onBackKeyDown, false);
-        window.addEventListener("batterystatus", onBatteryStatus, false);
-    }
-    function onBatteryStatus(status) 
-    {
-      alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
-    }
-    // Handle the back button
-    //
-    function onBackKeyDown() {
-		  alert("back");
-    }
-
-    </script>
-  </head>
-  <body onload="onLoad()">
-  </body>
 </html>
